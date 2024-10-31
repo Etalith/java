@@ -1,46 +1,134 @@
-// 1. Scrivi una funzione chiamata 'generaComplimento' che generi complimenti casuali. La funzione deve accettare il nome di una persona come parametro e generare un complimento casuale basato su una selezione randomica. (Usa Math.random() per generare un numero casuale compreso tra 1 e 7.)
-// 2. La funzione deve fare uso di un costrutto switch per selezionare il complimento.(Utilizza un switch per selezionare un complimento in base al numero casuale generato. Il complimento DEVE includere il nome passato come parametro)
-// 3. AGGIUNGERE un messaggio speciale per chi si chiama "Mario" utilizzando l'operatore ternario
-// 4. Stampa il complimento generato nella console.
+//Esercitazione 1
+// Dato il seguente array di oggetti 'notifiche'
+// Scrivi una funzione gestisciNotifiche che:
 
-//Bonus: Ci sono altri modi per fare la stessa operazione che non sia switch? Come?
+// Accetti come parametri l’array notifiche e una callback.
+// Filtri le notifiche in base al tipo specificato nella callback filtroTipo che filtra le notifiche in base al tipo "messaggio".
+// Ordini le notifiche per data, dalla più recente alla più vecchia.
+// Ritorni una lista formattata in cui ogni notifica mostra il nome dell’utente, il contenuto e la data.
 
+//**Suggerimento: utilizza sort e il costrutto new Date per ordinare le notifiche per data**
 
-function generaComplimento(a){
-    let numero = Math.floor(Math.random() * 7) + 1
-    let complimento = ""
-    switch (numero){
-        case 1:
-            complimento = a + " " + "hai dei capelli lisci";
-            break;
-        case 2:
-            complimento = a + " sei molto gentile";
-            break;
-        case 3:
-            complimento = a + " corri molto velocemente";
-            break;
-        case 4:
-            complimento = a + " sei una persona molto positiva";
-            break;
-        case 5:
-            complimento = a + " sei una persona molto solare";
-            break;
-        case 6:
-            complimento = a + " hai dei occhi bellissimi";
-            break;
-        case 7:
-            complimento = a + " sei molto determinato";
-            break;
-        default:
-            complimento = a + " non ti meriti niente";
-            break;
-    }
+const notifiche = [
+    {
+      utente: { nome: "Luca", email: "luca@example.com" },
+      tipo: "messaggio",
+      contenuto: "Hai un nuovo messaggio!",
+      data: "2024-10-28",
+    },
+    {
+      utente: { nome: "Anna", email: "anna@example.com" },
+      tipo: "like",
+      contenuto: "A qualcuno è piaciuto il tuo post!",
+      data: "2024-10-27",
+    },
+    {
+      utente: { nome: "Marco", email: "marco@example.com" },
+      tipo: "commento",
+      contenuto: "Hai un nuovo commento!",
+      data: "2024-10-26",
+    },
+    {
+        utente: { nome: "Sara", email: "sara@example.com" },
+        tipo: "messaggio",
+        contenuto: "Hai un nuovo messaggio!",
+        data: "2024-11-4",
+      },
+  ];
+  
+//     function gestisciNotifiche(a, b){
+//     const notificheFiltrate = a.filter(notifica => b(notifica.tipo));
+//     notificheFiltrate.sort((a, b) => new Date (a.data) - new Date (b.data));
+//     return notificheFiltrate.map(({utente: {nome, email}, contenuto, data}) => 
+//     `${nome} ${contenuto} del ${data} `).join("")
+  
+//   };
 
-    complimento += a.toLowerCase() === "mario" ? " inoltre chi si chiama Mario ha sempre una marcia in più" : ""
-    
-    console.log(complimento.toUpperCase())
-}
+//     const filtroTipo = tipo => tipo === "messaggio"
 
-generaComplimento("Francesca")
-generaComplimento("Luca")
-generaComplimento("Mario")
+//     console.log(gestisciNotifiche(notifiche, filtroTipo))
+  
+  //Esercitazione 2
+  // Dato il seguente array di oggetti 'feedbackAssistenza'
+  // Scrivi una funzione analizzaFeedback che:
+  
+  // Accetti come parametri l’array feedbackAssistenza e una callback per filtrare i feedback in base alla categoria.
+  // Filtri i feedback usando la callback per selezionare solo quelli di una specifica categoria.
+  // Calcoli la valutazione media della categoria e ritorni una stringa riepilogativa che includa:
+  // La categoria del feedback.
+  // La valutazione media.
+  // Un elenco dei commenti per quella categoria.
+  
+  const feedbackAssistenza = [
+    {
+      utente: { nome: "Luca", email: "luca@example.com" },
+      categoria: "Tecnico",
+      valutazione: 4,
+      commento: "Ottimo supporto!",
+    },
+    {
+      utente: { nome: "Anna", email: "anna@example.com" },
+      categoria: "Commerciale",
+      valutazione: 5,
+      commento: "Molto soddisfatta",
+    },
+    {
+      utente: { nome: "Marco", email: "marco@example.com" },
+      categoria: "Tecnico",
+      valutazione: 3,
+      commento: "Problemi risolti, ma con ritardo",
+    },
+    {
+      utente: { nome: "Sara", email: "sara@example.com" },
+      categoria: "Logistica",
+      valutazione: 4,
+      commento: "",
+    },
+  ];
+
+  // function analizzaFeedback(a, b){
+  //   const feedbackfilter = a.filter(feedback => b(feedback.categoria));
+  //   const mediaValutazione = feedbackfilter.reduce((acc, num) => acc + num.valutazione, 0) / feedbackAssistenza.length;
+  //   return feedbackfilter.map(({utente: {nome, email}, categoria, valutazione, commento}) => 
+  //   `${categoria}, ${commento}, ${mediaValutazione}`).join("")
+
+  // }
+  // const categoriaFilter = categoria => categoria === "Logistica"
+  // console.log(analizzaFeedback(feedbackAssistenza, categoriaFilter))
+  //Esercitazione 3
+  //Dato il seguente array prenotazioniAuto
+  // Scrivi una funzione gestisciPrenotazioni che:
+  
+  // Accetti come parametri l’array prenotazioniAuto e una callback.
+  // La callback permette di specificare un filtro basato sul modello di auto (ad esempio, "SUV" o "Berlina").
+  // Calcoli il costo totale del noleggio per ciascuna prenotazione in base ai giorni del periodo e alla tariffaGiornaliera.
+  // Restituisca una lista formattata con nome del cliente, modello dell'auto e costo totale del noleggio, includendo gli optional.
+  
+  const prenotazioniAuto = [
+    {
+      cliente: {
+        nome: "Luca",
+        email: "luca@example.com",
+        telefono: "1234567890",
+      },
+      auto: {
+        modello: "SUV",
+        tariffaGiornaliera: 50,
+        optional: ["GPS", "Assicurazione"],
+      },
+      periodo: ["2024-10-01", "2024-10-05"],
+    },
+    {
+      cliente: {
+        nome: "Anna",
+        email: "anna@example.com",
+        telefono: "0987654321",
+      },
+      auto: {
+        modello: "Berlina",
+        tariffaGiornaliera: 40,
+        optional: ["Assicurazione"],
+      },
+      periodo: ["2024-10-03", "2024-10-07"],
+    },
+  ];
